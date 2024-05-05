@@ -7,10 +7,7 @@ public class Program : MonoBehaviour
 {
     public Category selectedCategory;
     private List<Question> questions;
-    public int intOfCategory0=0;
-    public int intOfCategory1 = 1;
-    public int intOfCategory2 = 2;
-    public int intOfCategory3 = 3;
+    public int intOfCategory;
 
 
     void Start()
@@ -36,19 +33,19 @@ public class Program : MonoBehaviour
         {
             case "geografía":
                 category = Category.Geografía;
-                
+                intOfCategory = 0;
                 break;
             case "historia":
                 category = Category.Historia;
-               
+                intOfCategory = 1;
                 break;
             case "ciencia":
                 category = Category.Ciencia;
-                
+                intOfCategory = 2;
                 break;
             case "literatura":
                 category = Category.Literatura;
-                
+                intOfCategory = 3;
                 break;
             default:
                 Debug.LogError("Categoría no válida.");
@@ -91,7 +88,7 @@ public class Program : MonoBehaviour
                 Debug.LogError("Dificultad no válida.");
                 return; // Salir de la función si la categoría no es válida
         }
-        if (intOfCategory0 == 0)
+        if (intOfCategory == 0)
         {
 
             var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Geografía && q.Difficulty == difficulty)
@@ -100,7 +97,7 @@ public class Program : MonoBehaviour
 
         }
 
-        else if (intOfCategory1 == 1)
+        else if (intOfCategory == 1)
         {
 
             var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Historia && q.Difficulty == difficulty)
@@ -108,7 +105,7 @@ public class Program : MonoBehaviour
             Debug.Log("histo easy");
 
         }
-        else if (intOfCategory2 == 2)
+        else if (intOfCategory == 2)
         {
 
             var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Ciencia && q.Difficulty == difficulty)
