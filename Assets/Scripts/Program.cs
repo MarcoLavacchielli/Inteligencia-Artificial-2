@@ -7,17 +7,19 @@ public class Program : MonoBehaviour
 {
     public Category selectedCategory;
     private List<Question> questions;
+    public int intOfCategory;
+
 
     void Start()
     {
         // Ejemplo de lista de preguntas y respuestas
         questions = new List<Question>
         {
-            new Question("¿Cuál es la capital de Francia?", "París", Category.Geografía),
-            new Question("¿En qué año llegó el hombre a la luna por primera vez?", "1969", Category.Historia),
-            new Question("¿Cuál es el símbolo químico del agua?", "H2O", Category.Ciencia),
-            new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura),
-            new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura)
+            new Question("¿Cuál es la capital de Francia?", "París", Category.Geografía, Difficulty.Easy),
+            new Question("¿En qué año llegó el hombre a la luna por primera vez?", "1969", Category.Historia, Difficulty.Easy),
+            new Question("¿Cuál es el símbolo químico del agua?", "H2O", Category.Ciencia, Difficulty.Easy),
+            new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura, Difficulty.Easy),
+            new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura, Difficulty.Normal)
         };
 
         //ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
@@ -31,15 +33,19 @@ public class Program : MonoBehaviour
         {
             case "geografía":
                 category = Category.Geografía;
+                intOfCategory = 0;
                 break;
             case "historia":
                 category = Category.Historia;
+                intOfCategory = 1;
                 break;
             case "ciencia":
                 category = Category.Ciencia;
+                intOfCategory = 2;
                 break;
             case "literatura":
                 category = Category.Literatura;
+                intOfCategory = 3;
                 break;
             default:
                 Debug.LogError("Categoría no válida.");
@@ -49,10 +55,70 @@ public class Program : MonoBehaviour
         //ShowResults(category);
         var selectedQuestions = questions.Where(q => q.Category == category)
                                          .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+        //IEnumerable<Question> archivado= questions.Where(q => q.Category == category)
+        //                               .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+
+
         Debug.Log($"Preguntas de la categoría {category}:");
         foreach (var q in selectedQuestions)
         {
             Debug.Log($"Pregunta: {q.QuestionText}, Respuesta: {q.Answer}");
+        }
+
+    }
+
+    public void SelectDifficultyQuestionsButton(string DifficultyName)
+    {
+        Difficulty difficulty;
+
+        switch (DifficultyName.ToLower())
+        {
+            case "easy":
+                difficulty = Difficulty.Easy;
+                break;
+
+            case "normal":
+                difficulty = Difficulty.Normal;
+                break;
+            case "hard":
+                difficulty = Difficulty.Hard;
+                break;
+
+            default:
+                Debug.LogError("Dificultad no válida.");
+                return; // Salir de la función si la categoría no es válida
+        }
+        if (intOfCategory == 0)
+        {
+
+            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Geografía && q.Difficulty == difficulty)
+                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+            Debug.Log("geo easy");
+
+        }
+
+        else if (intOfCategory == 1)
+        {
+
+            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Historia && q.Difficulty == difficulty)
+                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+            Debug.Log("histo easy");
+
+        }
+        else if (intOfCategory == 2)
+        {
+
+            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Ciencia && q.Difficulty == difficulty)
+                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+            Debug.Log("ciencia easy");
+
+        }
+        else
+        {
+
+            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Literatura && q.Difficulty == difficulty)
+                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+            Debug.Log("lit easy");
         }
 
     }
@@ -72,7 +138,7 @@ public class Program : MonoBehaviour
         var difficultQuestions = questions.Where(q => q.Text.Length > 30);
 
         // 1 Take o Skip (Mínimo 1 concatenación)
-        var firstTwoQuestions = questions.Take(2);
+        var firstTwoQuestions = questions.Take(2); // ESTE ESTA BUENO DESPUES DEL FILTRADO PARA QUE APAREZCA LA PREG A RESOLVER EN PANTALLA AL JUGADOR
 
         // 1 TakeWhile o SkipWhile (Sin mínimo)
         var skipWhileShortQuestions = questions.SkipWhile(q => q.Text.Length < 20);
@@ -84,8 +150,8 @@ public class Program : MonoBehaviour
         // 1 Concat (Se puede utilizar + FList) (Sin mínimo)
         var additionalQuestions = new List<Question>
         {
-            new Question("¿Cuál es el río más largo del mundo?", "Nilo", Category.Geografía),
-            new Question("¿Cuál es el planeta más grande del sistema solar?", "Júpiter", Category.Ciencia)
+            new Question("¿Cuál es el río más largo del mundo?", "Nilo", Category.Geografía, Difficulty.Normal),
+            new Question("¿Cuál es el planeta más grande del sistema solar?", "Júpiter", Category.Ciencia, Difficulty.Normal)
         };
         var combinedQuestions = questions.Concat(additionalQuestions);
 
@@ -136,17 +202,25 @@ public enum Category
     Ciencia,
     Literatura
 }
+public enum Difficulty
+{
+    Easy,
+    Normal,
+    Hard
+}
 
 public class Question
 {
     public string Text { get; }
     public string Answer { get; }
     public Category Category { get; }
+    public Difficulty Difficulty { get; }
     // poner otro enum de dificultad
-    public Question(string text, string answer, Category category)
+    public Question(string text, string answer, Category category, Difficulty difficulty)
     {
         Text = text;
         Answer = answer;
         Category = category;
+        Difficulty = difficulty;
     }
 }
