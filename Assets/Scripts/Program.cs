@@ -15,7 +15,8 @@ public class Program : MonoBehaviour
             new Question("¿Cuál es la capital de Francia?", "París", Category.Geografía),
             new Question("¿En qué año llegó el hombre a la luna por primera vez?", "1969", Category.Historia),
             new Question("¿Cuál es el símbolo químico del agua?", "H2O", Category.Ciencia),
-            new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura)
+            new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura),
+            new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura)
         };
 
         ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
