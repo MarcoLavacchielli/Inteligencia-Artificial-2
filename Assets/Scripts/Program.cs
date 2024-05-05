@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Program : MonoBehaviour
 {
@@ -22,8 +23,29 @@ public class Program : MonoBehaviour
         //ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
     }
 
-    public void SelectCategoryMenuButtonFunction(Category category)
+    public void SelectCategoryMenuButtonFunction(string categoryName)
     {
+        Category category;
+        //
+        switch (categoryName.ToLower()) // Convertir el nombre a minúsculas para comparación sin distinción entre mayúsculas y minúsculas
+        {
+            case "geografía":
+                category = Category.Geografía;
+                break;
+            case "historia":
+                category = Category.Historia;
+                break;
+            case "ciencia":
+                category = Category.Ciencia;
+                break;
+            case "literatura":
+                category = Category.Literatura;
+                break;
+            default:
+                Debug.LogError("Categoría no válida.");
+                return; // Salir de la función si la categoría no es válida
+        }
+        //
         //ShowResults(category);
         var selectedQuestions = questions.Where(q => q.Category == category)
                                          .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
