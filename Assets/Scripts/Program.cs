@@ -19,8 +19,22 @@ public class Program : MonoBehaviour
             new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura)
         };
 
-        ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
+        //ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
     }
+
+    public void SelectCategoryMenuButtonFunction(Category category)
+    {
+        //ShowResults(category);
+        var selectedQuestions = questions.Where(q => q.Category == category)
+                                         .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+        Debug.Log($"Preguntas de la categoría {category}:");
+        foreach (var q in selectedQuestions)
+        {
+            Debug.Log($"Pregunta: {q.QuestionText}, Respuesta: {q.Answer}");
+        }
+
+    }
+
 
     void ShowResults(Category selectedCategory)
     {
@@ -106,7 +120,7 @@ public class Question
     public string Text { get; }
     public string Answer { get; }
     public Category Category { get; }
-
+    // poner otro enum de dificultad
     public Question(string text, string answer, Category category)
     {
         Text = text;
