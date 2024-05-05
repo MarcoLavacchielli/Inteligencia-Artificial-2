@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Program : MonoBehaviour
 {
+    public Category selectedCategory;
     private List<Question> questions;
 
     void Start()
@@ -17,15 +18,16 @@ public class Program : MonoBehaviour
             new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura)
         };
 
-        ShowResults();
+        ShowResults(selectedCategory); // Pasar la categoría seleccionada como argumento
     }
 
-    void ShowResults()
+    void ShowResults(Category selectedCategory)
     {
         // Utilizando LINQ para cumplir las consignas
 
         // 2 Select (Mínimo 1 concatenación)
-        var selectedQuestions = questions.Select(q => new { QuestionText = q.Text, Answer = q.Answer });
+        var selectedQuestions = questions.Where(q => q.Category == selectedCategory)
+                                         .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
         var questionsWithoutAnswers = questions.Select(q => q.Text);
 
         // 2 Where (Mínimo 2 concatenaciones)
@@ -80,10 +82,10 @@ public class Program : MonoBehaviour
         var categorizedQuestions = questions.GroupBy(q => q.Category);
 
         // Mostrar resultados en la consola de Unity
-        Debug.Log("Selected Questions:");
+        Debug.Log($"Preguntas de la categoría {selectedCategory}:");
         foreach (var q in selectedQuestions)
         {
-            Debug.Log($"Question: {q.QuestionText}, Answer: {q.Answer}");
+            Debug.Log($"Pregunta: {q.QuestionText}, Respuesta: {q.Answer}");
         }
 
         // Mostrar otros resultados de LINQ...
