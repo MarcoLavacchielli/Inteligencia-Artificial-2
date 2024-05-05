@@ -1,13 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public class Program
+public class Program : MonoBehaviour
 {
-    public static void Main(string[] args)
+    private List<Question> questions;
+
+    void Start()
     {
         // Ejemplo de lista de preguntas y respuestas
-        List<Question> questions = new List<Question>
+        questions = new List<Question>
         {
             new Question("¿Cuál es la capital de Francia?", "París", Category.Geografía),
             new Question("¿En qué año llegó el hombre a la luna por primera vez?", "1969", Category.Historia),
@@ -15,6 +17,11 @@ public class Program
             new Question("¿Quién escribió 'Don Quijote de la Mancha'?", "Miguel de Cervantes", Category.Literatura)
         };
 
+        ShowResults();
+    }
+
+    void ShowResults()
+    {
         // Utilizando LINQ para cumplir las consignas
 
         // 2 Select (Mínimo 1 concatenación)
@@ -72,11 +79,11 @@ public class Program
         // Al menos una utilización de tipos compuestos en algún lugar del código, para procesar o crear a partir de ciertos datos. (Tuplas/Tipos anónimos)
         var categorizedQuestions = questions.GroupBy(q => q.Category);
 
-        // Mostrar resultados (para fines de demostración)
-        Console.WriteLine("Selected Questions:");
+        // Mostrar resultados en la consola de Unity
+        Debug.Log("Selected Questions:");
         foreach (var q in selectedQuestions)
         {
-            Console.WriteLine($"Question: {q.QuestionText}, Answer: {q.Answer}");
+            Debug.Log($"Question: {q.QuestionText}, Answer: {q.Answer}");
         }
 
         // Mostrar otros resultados de LINQ...
