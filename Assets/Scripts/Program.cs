@@ -76,51 +76,49 @@ public class Program : MonoBehaviour
             case "easy":
                 difficulty = Difficulty.Easy;
                 break;
-
             case "normal":
                 difficulty = Difficulty.Normal;
                 break;
             case "hard":
                 difficulty = Difficulty.Hard;
                 break;
-
             default:
                 Debug.LogError("Dificultad no válida.");
-                return; // Salir de la función si la categoría no es válida
+                return;
         }
+
+        IEnumerable<object> selectedQuestionsByDifficulty;
+
         if (intOfCategory == 0)
         {
-
-            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Geografía && q.Difficulty == difficulty)
-                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
-            Debug.Log("geo easy");
-
+            selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Geografía && q.Difficulty == difficulty)
+                                                     .Select(q => new { QuestionText = q.Text, Answer = q.Answer })
+                                                     .Take(difficulty == Difficulty.Easy ? 1 : difficulty == Difficulty.Normal ? 2 : 3);
+            Debug.Log($"Geografía {DifficultyName}");
         }
-
         else if (intOfCategory == 1)
         {
-
-            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Historia && q.Difficulty == difficulty)
-                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
-            Debug.Log("histo easy");
-
+            selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Historia && q.Difficulty == difficulty)
+                                                     .Select(q => new { QuestionText = q.Text, Answer = q.Answer })
+                                                     .Take(difficulty == Difficulty.Easy ? 1 : difficulty == Difficulty.Normal ? 2 : 3);
+            Debug.Log($"Historia {DifficultyName}");
         }
         else if (intOfCategory == 2)
         {
-
-            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Ciencia && q.Difficulty == difficulty)
-                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
-            Debug.Log("ciencia easy");
-
+            selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Ciencia && q.Difficulty == difficulty)
+                                                     .Select(q => new { QuestionText = q.Text, Answer = q.Answer })
+                                                     .Take(difficulty == Difficulty.Easy ? 1 : difficulty == Difficulty.Normal ? 2 : 3);
+            Debug.Log($"Ciencia {DifficultyName}");
         }
         else
         {
-
-            var selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Literatura && q.Difficulty == difficulty)
-                                            .Select(q => new { QuestionText = q.Text, Answer = q.Answer });
-            Debug.Log("lit easy");
+            selectedQuestionsByDifficulty = questions.Where(q => q.Category == Category.Literatura && q.Difficulty == difficulty)
+                                                     .Select(q => new { QuestionText = q.Text, Answer = q.Answer })
+                                                     .Take(difficulty == Difficulty.Easy ? 1 : difficulty == Difficulty.Normal ? 2 : 3);
+            Debug.Log($"Literatura {DifficultyName}");
         }
 
+        // Aquí podrías realizar acciones con las preguntas seleccionadas, como mostrarlas al jugador
     }
 
 
