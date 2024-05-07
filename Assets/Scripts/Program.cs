@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class Program : MonoBehaviour
 {
     private Category selectedCategory;
-    public Difficulty selectedDifficulty; // Nueva variable para la dificultad
+    private Difficulty selectedDifficulty; // Nueva variable para la dificultad
     private List<Question> questions;
     private Difficult difficultySelector; // Referencia al script de selección de dificultad
+
+    public TMP_Text textDisplay; // Referencia al objeto de texto en Unity usando TextMeshPro
 
     void Start()
     {
@@ -63,13 +66,16 @@ public class Program : MonoBehaviour
                                                  .Select(q => new { QuestionText = q.Text, Answer = q.Answer })
                                                  .Take(selectedDifficulty == Difficulty.Easy ? 1 : selectedDifficulty == Difficulty.Normal ? 2 : questions.Count(q => q.Category == selectedCategory));
 
-        Debug.Log($"Preguntas de la categoría {selectedCategory} para la dificultad {selectedDifficulty}:");
+        string displayText = $"Preguntas de la categoría {selectedCategory} para la dificultad {selectedDifficulty}:\n";
         foreach (var q in selectedQuestionsByDifficulty)
         {
             var questionText = q.GetType().GetProperty("QuestionText").GetValue(q, null);
             var answer = q.GetType().GetProperty("Answer").GetValue(q, null);
-            Debug.Log($"Pregunta: {questionText}, Respuesta: {answer}");
+            displayText += $"Pregunta: {questionText}, Respuesta: {answer}\n";
         }
+
+        // Actualiza el texto en el objeto de texto en Unity usando TextMeshPro
+        textDisplay.text = displayText;
     }
 
     // Otras funciones del script...
