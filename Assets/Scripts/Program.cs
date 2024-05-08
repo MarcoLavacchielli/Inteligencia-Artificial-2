@@ -54,7 +54,7 @@ public class Program : MonoBehaviour
             m += $"\nrta: {q}";
         }
 
-        selectedArchiveAnswers = selectedArchiveAnswers.OrderByDescending(x => x);
+        selectedArchiveAnswers = selectedArchiveAnswers.OrderBy(x => x);
 
         return m;
     }
