@@ -36,16 +36,17 @@ public class Program : MonoBehaviour
             new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura, Difficulty.Normal)
         };
     }
-    public string PrintPlayerStatus()//sin side effect
+    public string PrintPlayerStatus()
     {
         IEnumerable<int> selectedRightAnswers;
-        selectedRightAnswers= RightOrNotAnswers.TakeWhile(x => x == 1);
+        selectedRightAnswers = RightOrNotAnswers.OrderBy(x => x)
+                                                 .TakeWhile(x => x == 1);
         IEnumerable<string> selectedArchiveAnswers;
         selectedArchiveAnswers = TheAnswersYouSelect.OrderBy(x => x);
 
         int f=selectedRightAnswers.Count();
         string m= $" total de respuestas correctas son{f}";
-        if (selectedRightAnswers.Count() !=questionsAnsweredCounter)// solo se lee el counter asi que no cuenta como sideeffect(no?
+        if (selectedRightAnswers.Count() !=questionsAnsweredCounter)
         {
             m = "hubo respuestas incorrectas";
         }
