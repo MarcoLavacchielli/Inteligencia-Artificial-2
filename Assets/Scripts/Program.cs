@@ -42,9 +42,11 @@ public class Program : MonoBehaviour
         selectedRightAnswers = RightOrNotAnswers.OrderBy(x => x)
                                                  .TakeWhile(x => x == 1);
         IEnumerable<string> selectedArchiveAnswers;
-        selectedArchiveAnswers = TheAnswersYouSelect.OrderBy(x => x);
+        selectedArchiveAnswers = TheAnswersYouSelect.Concat(RightOrNotAnswers.Where(x => x == 2).Select(_ => "Respuesta Incorrecta"));
 
-        int f=selectedRightAnswers.Count();
+        selectedArchiveAnswers = selectedArchiveAnswers.OrderBy(x => x);
+
+        int f =selectedRightAnswers.Count();
         string m= $" total de respuestas correctas son{f}";
         if (selectedRightAnswers.Count() !=questionsAnsweredCounter)
         {
@@ -78,7 +80,7 @@ public class Program : MonoBehaviour
     public void WrongAnswerButtonFunction()// con side effect
     {
         RightOrNotAnswers.Add(2);
-        TheAnswersYouSelect.Add("Otro");
+        //TheAnswersYouSelect.Add("Otro");
         questionsAnsweredCounter++;
         if(questionsAnsweredCounter >= 3)
         {
