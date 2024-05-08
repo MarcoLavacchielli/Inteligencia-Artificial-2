@@ -7,16 +7,15 @@ using UnityEngine.UI;
 public class Program : MonoBehaviour
 {
     private Category selectedCategory;
-    private Difficulty selectedDifficulty; // Nueva variable para la dificultad
+    private Difficulty selectedDifficulty;
     private List<Question> questions;
-    private Difficult difficultySelector; // Referencia al script de selección de dificultad
+    private Difficult difficultySelector;
 
-    public TMP_Text textDisplay; // Referencia al objeto de texto en Unity usando TextMeshPro
+    public TMP_Text textDisplay;
     public TextMeshProUGUI RightAnswerText;
-    //cosas para la respuesta correcta
     public UIManager UIManagerScript;
-    public List<int> RightOrNotAnswers;//si Int es=1 es correcta si es =2 en incorrecta
-    public List<string> TheAnswersYouSelect;// Paras que al terminar el juego(a las 5 preg poner un listado con un orderBy)
+    public List<int> RightOrNotAnswers;
+    public List<string> TheAnswersYouSelect;
     public int questionsAnsweredCounter;
     public TMP_Text textStatusDisplay;
 
@@ -24,7 +23,6 @@ public class Program : MonoBehaviour
 
     void Start()
     {
-        // Obtener la referencia al script de selección de dificultad
         difficultySelector = FindObjectOfType<Difficult>();
 
         questions = new List<Question>
@@ -36,29 +34,31 @@ public class Program : MonoBehaviour
             new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura, Difficulty.Normal)
         };
     }
-    public string PrintPlayerStatus()//sin side effect
+    public string PrintPlayerStatus()
     {
         IEnumerable<int> selectedRightAnswers;
-        selectedRightAnswers= RightOrNotAnswers.TakeWhile(x => x == 1);
+        selectedRightAnswers = RightOrNotAnswers.TakeWhile(x => x == 1);
         IEnumerable<string> selectedArchiveAnswers;
         selectedArchiveAnswers = TheAnswersYouSelect.OrderBy(x => x);
 
-        int f=selectedRightAnswers.Count();
-        string m= $" total de respuestas correctas son{f}";
-        if (selectedRightAnswers.Count() !=questionsAnsweredCounter)// solo se lee el counter asi que no cuenta como sideeffect(no?
+        int f = selectedRightAnswers.Count();
+        string m = $" total de respuestas correctas son {f}";
+        if (selectedRightAnswers.Count() != questionsAnsweredCounter)
         {
             m = "hubo respuestas incorrectas";
         }
         else
-            m = $"El total de respuestas fueron respondidas correctamente({f} y fueron las siguiente:)";
-        foreach(string q in selectedArchiveAnswers)
+            m = $"El total de respuestas fueron respondidas correctamente ({f} y fueron las siguientes:)";
+        foreach (string q in selectedArchiveAnswers)
         {
             m += $"\nrta: {q}";
         }
+
+        selectedArchiveAnswers = selectedArchiveAnswers.OrderBy(x => x);
+
         return m;
-        
     }
-    public void RightAnswerButtonFunction()// con side effect
+    public void RightAnswerButtonFunction()
     {
         RightOrNotAnswers.Add(1);
         TheAnswersYouSelect.Add(RightAnswerText.text);
@@ -74,22 +74,21 @@ public class Program : MonoBehaviour
 
     }
 
-    public void WrongAnswerButtonFunction()// con side effect
+    public void WrongAnswerButtonFunction()
     {
         RightOrNotAnswers.Add(2);
         TheAnswersYouSelect.Add("Otro");
         questionsAnsweredCounter++;
-        if(questionsAnsweredCounter >= 3)
+        if (questionsAnsweredCounter >= 3)
         {
             UIManagerScript.ShowStatus();
-            //textStatusDisplay.text = $" la cantidad de respuestas correctas fueron {PrintPlayerStatus()}";
             textStatusDisplay.text = PrintPlayerStatus();
         }
         else
-        UIManagerScript.GoBack();
+            UIManagerScript.GoBack();
 
     }
-    string PrintAnswerInButtonText()// YA NO TIENE SIDE EFFECT   
+    string PrintAnswerInButtonText()
     {
         IEnumerable<object> selectedQuestionsByDifficulty;
 
@@ -100,17 +99,15 @@ public class Program : MonoBehaviour
         string displayText = $"";
         foreach (var q in selectedQuestionsByDifficulty)
         {
-           
+
             var answer = q.GetType().GetProperty("Answer").GetValue(q, null);
             displayText += $"Respuesta: {answer}";
         }
 
-        // Actualiza el texto en el objeto de texto en Unity usando TextMeshPro
-        //textDisplay.text = displayText;
         return displayText;
     }
 
-    public void SelectCategoryMenuButtonFunction(string categoryName)// con side effect
+    public void SelectCategoryMenuButtonFunction(string categoryName)
     {
         Category category;
         switch (categoryName.ToLower())
@@ -132,19 +129,16 @@ public class Program : MonoBehaviour
                 return;
         }
 
-        selectedCategory = category; // Guardar la categoría seleccionada
+        selectedCategory = category;
 
-        // Obtener la dificultad seleccionada del script de selección de dificultad
         selectedDifficulty = difficultySelector.selectedDifficulty;
 
-        // Luego, llamar a la función que selecciona las preguntas según la dificultad
         textDisplay.text = PrintQuestionInUI();
         RightAnswerText.text = PrintAnswerInButtonText();
-        //PrintQuestionInUI();
     }
 
 
-    string PrintQuestionInUI()// YA NO TIENE SIDE EFFECT   
+    string PrintQuestionInUI()
     {
         IEnumerable<object> selectedQuestionsByDifficulty;
 
@@ -156,20 +150,14 @@ public class Program : MonoBehaviour
         foreach (var q in selectedQuestionsByDifficulty)
         {
             var questionText = q.GetType().GetProperty("QuestionText").GetValue(q, null);
-            
+
             displayText += $"Pregunta: {questionText}";
         }
 
-        // Actualiza el texto en el objeto de texto en Unity usando TextMeshPro
-        //textDisplay.text = displayText;
         return displayText;
     }
 
-    // Otras funciones del script...
-
-    // Enumeraciones y clase de preguntas...
 }
-
 
 
 public enum Category
