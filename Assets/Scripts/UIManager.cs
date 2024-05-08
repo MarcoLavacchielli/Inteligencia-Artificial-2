@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
         panels[index].SetActive(true);
         order.Push(index);
     }
+    public void ShowStatus()
+    {
+        panels[2].SetActive(true);
+    }
 
     public void GoBack()
     {
