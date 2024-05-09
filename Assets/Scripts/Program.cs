@@ -18,6 +18,13 @@ public class Program : MonoBehaviour
     public List<string> TheAnswersYouSelect;
     public int questionsAnsweredCounter;
     public TMP_Text textStatusDisplay;
+    //TimerVariables
+    public List<float> TimeTakenForEveryQuestion;
+    public float Timer;
+    public UIManager UIManager;
+    public GameObject SecondPanel;
+    public TextMeshProUGUI TimerText;
+    public TMP_Text textTimeDisplay;
 
     void Start()
     {
@@ -32,6 +39,13 @@ public class Program : MonoBehaviour
             new Question("¿Quién escribió 'Billy Summers'?", "Stephen King", Category.Literatura, Difficulty.Normal)
         };
     }
+    private void Update()
+    {
+        if(SecondPanel.gameObject.activeInHierarchy)
+        Timer += Time.deltaTime;
+        TimerText.text = $"timer: {Timer}";
+
+    }
 
     public string PrintPlayerStatus()
     {
@@ -44,6 +58,7 @@ public class Program : MonoBehaviour
             .Where((answer, index) => RightOrNotAnswers[index] == 2)
             .TakeWhile((answer, index) => index < questionsAnsweredCounter)
             .OrderBy(x => x);
+        float tIMEtakenForeEveryQuestonEnum= TimeTakenForEveryQuestion.OrderByDescending(x=>x).Last();
 
         IEnumerable<string> combinedMessages = correctAnswers.Concat(incorrectAnswers);
 
@@ -51,9 +66,26 @@ public class Program : MonoBehaviour
 
         return statusMessage;
     }
+    public string PrintBestTimeAndYouWonOrNotInStatus()
+    {
+        float tIMEtakenForeEveryQuestonEnum = TimeTakenForEveryQuestion.OrderByDescending(x => x).Last();
+        string textThatWillBePrint = $" tu mejor tiempo:{tIMEtakenForeEveryQuestonEnum}";
+        bool YouPassOrNot = RightOrNotAnswers.Any(x => x > 1);
+        if (YouPassOrNot)
+        {
+            textThatWillBePrint += "\n no has pasado el nivel";
+        }
+        else
+        {
+            textThatWillBePrint += "\n has completado el nivel";
+        }
+        return textThatWillBePrint;
+    }
 
     public void RightAnswerButtonFunction()
     {
+        TimeTakenForEveryQuestion.Add(Timer);
+        Timer = 0;
         RightOrNotAnswers.Add(1);
         TheAnswersYouSelect.Add(RightAnswerText.text);
         questionsAnsweredCounter++;
@@ -61,7 +93,9 @@ public class Program : MonoBehaviour
         {
             UIManagerScript.ShowStatus();
             textStatusDisplay.text = PrintPlayerStatus();
+            textTimeDisplay.text = PrintBestTimeAndYouWonOrNotInStatus();
             DisplayPlayerStatusOnUI();
+
         }
         else
         {
@@ -71,6 +105,8 @@ public class Program : MonoBehaviour
 
     public void WrongAnswerButtonFunction()
     {
+        TimeTakenForEveryQuestion.Add(Timer);
+        Timer = 0;
         RightOrNotAnswers.Add(2);
         questionsAnsweredCounter++;
         TheAnswersYouSelect.Add("Respuesta Incorrecta");
@@ -78,6 +114,7 @@ public class Program : MonoBehaviour
         {
             UIManagerScript.ShowStatus();
             textStatusDisplay.text = PrintPlayerStatus();
+            textTimeDisplay.text = PrintBestTimeAndYouWonOrNotInStatus();
             DisplayPlayerStatusOnUI();
         }
         else
