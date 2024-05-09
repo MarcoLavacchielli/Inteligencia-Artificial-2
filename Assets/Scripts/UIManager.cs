@@ -9,9 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] panels;
     private readonly Stack<int> order = new Stack<int>();
 
+    public int initialPanel;
+
     private void Start()
     {
-        SwitchPanel(0);
+        SwitchPanel(initialPanel);
     }
 
     public void SwitchPanel(int index)
