@@ -43,8 +43,7 @@ public class Program : MonoBehaviour
         IEnumerable<string> incorrectAnswers = TheAnswersYouSelect
             .Where((answer, index) => RightOrNotAnswers[index] == 2)
             .TakeWhile((answer, index) => index < questionsAnsweredCounter)
-            .OrderBy(x => x)
-            .Select(x => "Respuesta incorrecta\n" + x);
+            .OrderBy(x => x);
 
         IEnumerable<string> combinedMessages = correctAnswers.Concat(incorrectAnswers);
 
@@ -74,6 +73,7 @@ public class Program : MonoBehaviour
     {
         RightOrNotAnswers.Add(2);
         questionsAnsweredCounter++;
+        TheAnswersYouSelect.Add("Respuesta Incorrecta");
         if (questionsAnsweredCounter >= 3)
         {
             UIManagerScript.ShowStatus();
