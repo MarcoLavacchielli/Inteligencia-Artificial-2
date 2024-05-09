@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (PlayerPrefs.HasKey("ValorSliderMusica"))
         {
             float valorRecuperadoMusica = PlayerPrefs.GetFloat("ValorSliderMusica");
@@ -29,7 +29,6 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
-
         else
         {
             Destroy(gameObject);
@@ -43,53 +42,28 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(int index)
     {
-        if (musicSource[index] == null)
-        {
-            Debug.Log("Sound Not Found");
-        }
-
-        else
-        {
-            musicSource[index].Play();
-        }
-
+        musicSource[index]?.Play();
     }
 
-    public void PlaySFX(int index)
+    public void PlayFirstMusic()
     {
-
-        if (sfxSource[index] == null)
+        var firstMusicClip = musicSounds.Where(sound => sound.name.StartsWith("Music")).FirstOrDefault()?.clip;
+        if (firstMusicClip != null && musicSounds.Any())
         {
-            Debug.Log("Sound Not Found");
+            musicSource.FirstOrDefault()?.PlayOneShot(firstMusicClip);
         }
-
-        else
-        {
-            sfxSource[index].Play();
-        }
-
     }
 
     public void MusicVolume(float volume)
     {
         PlayerPrefs.SetFloat("ValorSliderMusica", volume);
-        foreach (var item in musicSource)
-        {
-
-            item.volume = volume;
-
-        }
+        musicSource.ToList().ForEach(item => item.volume = volume);
     }
 
     public void SFXVolume(float volume)
     {
         PlayerPrefs.SetFloat("ValorSliderSFX", volume);
-        foreach (var item in sfxSource)
-        {
-
-            item.volume = volume;
-
-        }
+        sfxSource.ToList().ForEach(item => item.volume = volume);
     }
 
     public void PauseSFX(int index)
