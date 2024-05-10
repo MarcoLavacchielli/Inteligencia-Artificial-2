@@ -16,15 +16,13 @@ public class Characters : MonoBehaviour
         // Obtener todas las instancias de Characters en la escena
         Characters[] charactersInScene = FindObjectsOfType<Characters>();
 
-        // Filtrar los personajes mayores y menores de 18 años
-        var adults = charactersInScene.Where(character => character.Age >= 18).ToList();
-        var minors = charactersInScene.Where(character => character.Age < 18).ToList();
+        // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
+        var adultCharacters = GetCharactersAndColor(charactersInScene.Where(character => character.Age >= 18).ToList(), adultColor);
+        var minorCharacters = GetCharactersAndColor(charactersInScene.Where(character => character.Age < 18).ToList(), minorColor);
 
-        // Cambiar el color de los personajes mayores
-        ChangeCharacterColor(adults, adultColor);
-
-        // Cambiar el color de los personajes menores
-        ChangeCharacterColor(minors, minorColor);
+        // Cambiar el color de los personajes y obtener las listas de personajes modificados
+        var adultCharactersModified = ChangeCharacterColor(adultCharacters.Item1, adultCharacters.Item2);
+        var minorCharactersModified = ChangeCharacterColor(minorCharacters.Item1, minorCharacters.Item2);
 
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
         var sortedCharacters = charactersInScene
@@ -51,8 +49,8 @@ public class Characters : MonoBehaviour
         }
     }
 
-    // Función para cambiar el color de los personajes
-    void ChangeCharacterColor(List<Characters> characters, Color color)
+    // Función para cambiar el color de los personajes y devolver la lista de personajes modificados
+    List<Characters> ChangeCharacterColor(List<Characters> characters, Color color)
     {
         foreach (var character in characters)
         {
@@ -62,5 +60,12 @@ public class Characters : MonoBehaviour
                 renderer.material.color = color;
             }
         }
+        return characters;
+    }
+
+    // Función para obtener la lista de personajes y el color correspondiente en una tupla
+    (List<Characters>, Color) GetCharactersAndColor(List<Characters> characters, Color color)
+    {
+        return (characters, color);
     }
 }
