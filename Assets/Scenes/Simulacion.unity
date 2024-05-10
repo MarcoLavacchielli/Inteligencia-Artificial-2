@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Larry
   CharacterLastName: Kaverga
-  CharacterAge: 12
+  Age: 34
 --- !u!136 &205653700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Jorge
   CharacterLastName: Nitales
-  CharacterAge: 24
+  Age: 13
 --- !u!136 &579445583
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Tomas
   CharacterLastName: Demichele
-  CharacterAge: 16
+  Age: 17
 --- !u!136 &620750605
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Kewas
   CharacterLastName: Kaso
-  CharacterAge: 33
+  Age: 33
 --- !u!136 &1574399733
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Paca
   CharacterLastName: Garte
-  CharacterAge: 20
+  Age: 55
 --- !u!136 &1997923305
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Elver
   CharacterLastName: Galarga
-  CharacterAge: 55
+  Age: 43
 --- !u!136 &2031475926
 CapsuleCollider:
   m_ObjectHideFlags: 0
