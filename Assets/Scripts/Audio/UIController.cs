@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void MusicVolume()
+    /*public void MusicVolume()
     {
         AudioManager.Instance.MusicVolume(musicSlider.value);
     }
@@ -29,10 +29,24 @@ public class UIController : MonoBehaviour
     public void SFXVolume()
     {
         AudioManager.Instance.SFXVolume(sfxSlider.value);
-    }
+    }*/
 
     public void PlayFirstMusic()
     {
         AudioManager.Instance.PlayFirstMusic();
+    }
+
+    public void AdjustMusicVolume(float volume)
+    {
+        var musicSliders = FindObjectsOfType<Slider>().OfType<Slider>().Where(slider => slider.name == "MusicSlider").ToList();
+        musicSliders.ForEach(slider => slider.value = volume);
+        AudioManager.Instance.MusicVolume(volume);
+    }
+
+    public void AdjustSFXVolume(float volume)
+    {
+        var sfxSliders = FindObjectsOfType<Slider>().OfType<Slider>().Where(slider => slider.name == "SFXSlider").ToList();
+        sfxSliders.ForEach(slider => slider.value = volume);
+        AudioManager.Instance.SFXVolume(volume);
     }
 }
