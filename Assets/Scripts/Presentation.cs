@@ -18,7 +18,10 @@ public class Presentation : MonoBehaviour
         var names = new List<string> { "Marco", "Santiago", "Facundo" };
         var lastNames = new List<string> { "Lavacchielli", "Sanchez", "Tisera" };
 
-        var studentData = names.Zip(lastNames, (name, lastName) => (Name: name, LastName: lastName));
+        var studentData = names
+            .Zip(lastNames, (name, lastName) => (Name: name, LastName: lastName))
+            .OrderBy(student => student.LastName)
+            .ThenBy(student => student.Name);
 
         string finalText = "Names of the students:\n";
         foreach (var student in studentData)
