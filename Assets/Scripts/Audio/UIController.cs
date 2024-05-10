@@ -21,16 +21,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-    /*public void MusicVolume()
-    {
-        AudioManager.Instance.MusicVolume(musicSlider.value);
-    }
-
-    public void SFXVolume()
-    {
-        AudioManager.Instance.SFXVolume(sfxSlider.value);
-    }*/
-
     public void PlayFirstMusic()
     {
         AudioManager.Instance.PlayFirstMusic();
