@@ -4055,8 +4055,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1183144244}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: AdjustMusicVolume
-        m_Mode: 0
+        m_MethodName: MusicVolume
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5678,8 +5678,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1183144244}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: AdjustSFXVolume
-        m_Mode: 0
+        m_MethodName: SFXVolume
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
