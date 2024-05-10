@@ -68,10 +68,14 @@ public class Program : MonoBehaviour
     }
     public string PrintBestTimeAndYouWonOrNotInStatus()
     {
+
+        float suma = RightOrNotAnswers.Aggregate(0, (acum, current) => acum + current);
+        double sumadetiempos = TimeTakenForEveryQuestion.Select(x => (double)x).Aggregate((total, next) => total + next);
+
         float tIMEtakenForeEveryQuestonEnum = TimeTakenForEveryQuestion.OrderByDescending(x => x).Last();
-        string textThatWillBePrint = $" tu mejor tiempo:{tIMEtakenForeEveryQuestonEnum}";
-        bool YouPassOrNot = RightOrNotAnswers.Any(x => x > 1);
-        if (YouPassOrNot)
+        string textThatWillBePrint = $" tu mejor tiempo:{tIMEtakenForeEveryQuestonEnum}. en total te ha llevado {sumadetiempos}";
+        //bool YouPassOrNot = RightOrNotAnswers.Any(x => x > 1);
+        if (suma != 3)
         {
             textThatWillBePrint += "\n no has pasado el nivel";
         }
