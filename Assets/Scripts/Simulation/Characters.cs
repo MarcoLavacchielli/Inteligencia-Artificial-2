@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.TextCore.Text;
 
 public class Characters : MonoBehaviour
 {
@@ -10,8 +11,27 @@ public class Characters : MonoBehaviour
     public int Age;
     private Color adultColor = Color.red;
     private Color minorColor = Color.green;
+    public int iHaveMoney;
+    public bool WantsToAttendConcert;
+    public Patrullaje Patrullaje;
 
+    private void Awake()
+    {
+        Patrullaje=GetComponent<Patrullaje>();
+        
+    }
     void Start()
+    {
+        GeneralTestingStuff();
+    }
+   
+    public void IdidntGetTheTicketRoute()
+    {
+        Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
+        Patrullaje.rechazadoBool = true;
+        // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
+    }
+    public void GeneralTestingStuff()
     {
         // Obtener todas las instancias de Characters en la escena
         Characters[] charactersInScene = FindObjectsOfType<Characters>();
@@ -23,6 +43,18 @@ public class Characters : MonoBehaviour
         // Cambiar el color de los personajes y obtener las listas de personajes modificados
         var adultCharactersModified = ChangeCharacterColor(adultCharacters.Item1, adultCharacters.Item2);
         var minorCharactersModified = ChangeCharacterColor(minorCharacters.Item1, minorCharacters.Item2);
+
+        float averageAge = charactersInScene.Select(character => character.Age).Aggregate((sum, age) => sum + age) / charactersInScene.Length;
+        Debug.Log("Edad promedio de los personajes: " + averageAge);//sidee effect
+
+        int charactersWithMoney = charactersInScene.Aggregate(0, (count, character) => character.iHaveMoney > 10 ? count + 1 : count);
+
+        Debug.Log("Personajes que podran comprar una entrada/ comida/ ser robados por el jhonny: " + charactersWithMoney);//sidee effect
+        int ineligibleCharacters = charactersInScene.Aggregate(0, (count, character) =>
+            (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)) ? count + 1 : count);
+
+        //Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
+
 
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
         var sortedCharacters = charactersInScene
