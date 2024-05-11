@@ -44,17 +44,18 @@ public class Characters : MonoBehaviour
         var adultCharactersModified = ChangeCharacterColor(adultCharacters.Item1, adultCharacters.Item2);
         var minorCharactersModified = ChangeCharacterColor(minorCharacters.Item1, minorCharacters.Item2);
 
+        // Calcular la edad promedio de los personajes
         float averageAge = charactersInScene.Select(character => character.Age).Aggregate((sum, age) => sum + age) / charactersInScene.Length;
-        Debug.Log("Edad promedio de los personajes: " + averageAge);//sidee effect
+        Debug.Log("Edad promedio de los personajes: " + averageAge);
 
+        // Contar los personajes con suficiente dinero
         int charactersWithMoney = charactersInScene.Aggregate(0, (count, character) => character.iHaveMoney > 10 ? count + 1 : count);
+        Debug.Log("Personajes que podrán comprar una entrada/comida/ser robados por el jhonny: " + charactersWithMoney);
 
-        Debug.Log("Personajes que podran comprar una entrada/ comida/ ser robados por el jhonny: " + charactersWithMoney);//sidee effect
+        // Contar los personajes inelegibles para asistir al recital
         int ineligibleCharacters = charactersInScene.Aggregate(0, (count, character) =>
             (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)) ? count + 1 : count);
-
-        //Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
-
+        Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
 
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
         var sortedCharacters = charactersInScene
@@ -79,6 +80,14 @@ public class Characters : MonoBehaviour
             Vector3 newPosition = new Vector3(xPos, transform.position.y, transform.position.z);
             sortedCharacters[i].transform.position = newPosition;
         }
+
+        // Usar Zip para combinar las edades de los personajes adultos y menores en una secuencia de tuplas
+        var ageDifferences = adultCharacters.Item1.Select(adult => adult.Age)
+                                .Zip(minorCharacters.Item1.Select(minor => minor.Age), (adultAge, minorAge) => adultAge - minorAge);
+
+        // Calcular el promedio de las diferencias de edad
+        float averageAgeDifference = (float)ageDifferences.Average();
+        Debug.Log("Promedio de años que se llevan los personajes adultos con respecto a los menores: " + averageAgeDifference);
     }
 
     // Función para cambiar el color de los personajes y devolver la lista de personajes modificados
