@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.TextCore.Text;
 
 public class Characters : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Characters : MonoBehaviour
     public int Age;
     private Color adultColor = Color.red;
     private Color minorColor = Color.green;
-    private Color _VIP = Color.magenta;
+    private Color VIPColor = Color.magenta;
     public int iHaveMoney;
     public bool WantsToAttendConcert;
     public Patrullaje Patrullaje;
@@ -123,11 +122,12 @@ public class Characters : MonoBehaviour
         var vipCharacters = charactersInScene
             .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
             .TakeWhile(character => character.iHaveMoney > 10) // Tomar mientras tengan suficiente dinero
-            .Select(character =>
-            {
-                Debug.Log($"{character.CharacterName} es VIP."); // Imprimir que el personaje es VIP
-                return character;
-            })
             .ToList();
+
+        // Imprimir mensajes de personajes VIP
+        foreach (var vipCharacter in vipCharacters)
+        {
+            Debug.Log($"{vipCharacter.CharacterName} es VIP.");
+        }
     }
 }
