@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -10,10 +9,10 @@ public class Characters : MonoBehaviour
     public int Age;
     private Color adultColor = Color.red;
     private Color minorColor = Color.green;
-    private Color VIPColor = Color.magenta;
     public int iHaveMoney;
     public bool WantsToAttendConcert;
     public Patrullaje Patrullaje;
+    private Characters[] charactersInScene;
 
     private void Awake()
     {
@@ -22,18 +21,22 @@ public class Characters : MonoBehaviour
 
     void Start()
     {
+        charactersInScene = FindObjectsOfType<Characters>(); // Se busca una vez al inicio
         GeneralTestingStuff();
         VIP();
     }
+
     public void MCDonaldsRoute()
     {
         Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
 
     }
+
     public void BankRoute()
     {
         Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
     }
+
     public void IdidntGetTheTicketRoute()
     {
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
@@ -43,16 +46,11 @@ public class Characters : MonoBehaviour
 
     public void GeneralTestingStuff()
     {
-        // Obtener todas las instancias de Characters en la escena
-        Characters[] charactersInScene = FindObjectsOfType<Characters>();
-
         // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
-        var adultCharacters = GetCharactersAndColor(charactersInScene.Where(character => character.Age >= 18).ToList(), adultColor);
-        var minorCharacters = GetCharactersAndColor(charactersInScene.Where(character => character.Age < 18).ToList(), minorColor);
-
-        // Cambiar el color de los personajes y obtener las listas de personajes modificados
-        var adultCharactersModified = ChangeCharacterColor(adultCharacters.Item1, adultCharacters.Item2);
-        var minorCharactersModified = ChangeCharacterColor(minorCharacters.Item1, minorCharacters.Item2);
+        var adultCharacters = charactersInScene.Where(character => character.Age >= 18).ToList();
+        var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
+        ChangeCharacterColor(adultCharacters, adultColor);
+        ChangeCharacterColor(minorCharacters, minorColor);
 
         // Calcular la edad promedio de los personajes
         float averageAge = (float)charactersInScene.Select(character => character.Age).Average();
@@ -92,16 +90,16 @@ public class Characters : MonoBehaviour
         }
 
         // Usar Zip para combinar las edades de los personajes adultos y menores en una secuencia de tuplas
-        var ageDifferences = adultCharacters.Item1.Select(adult => adult.Age)
-                                .Zip(minorCharacters.Item1.Select(minor => minor.Age), (adultAge, minorAge) => adultAge - minorAge);
+        var ageDifferences = adultCharacters.Select(adult => adult.Age)
+                                .Zip(minorCharacters.Select(minor => minor.Age), (adultAge, minorAge) => adultAge - minorAge);
 
         // Calcular el promedio de las diferencias de edad
         float averageAgeDifference = (float)ageDifferences.Average();
         Debug.Log("Promedio de años que se llevan los personajes adultos con respecto a los menores: " + averageAgeDifference);
     }
 
-    // Función para cambiar el color de los personajes y devolver la lista de personajes modificados
-    List<Characters> ChangeCharacterColor(List<Characters> characters, Color color)
+    // Función para cambiar el color de los personajes
+    void ChangeCharacterColor(List<Characters> characters, Color color)
     {
         foreach (var character in characters)
         {
@@ -111,21 +109,11 @@ public class Characters : MonoBehaviour
                 renderer.material.color = color;
             }
         }
-        return characters;
-    }
-
-    // Función para obtener la lista de personajes y el color correspondiente en una tupla
-    (List<Characters>, Color) GetCharactersAndColor(List<Characters> characters, Color color)
-    {
-        return (characters, color);
     }
 
     // Función para trabajar con personajes VIP
     public void VIP()
     {
-        // Obtener todas las instancias de Characters en la escena
-        Characters[] charactersInScene = FindObjectsOfType<Characters>();
-
         // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
         var vipCharacters = charactersInScene
             .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
