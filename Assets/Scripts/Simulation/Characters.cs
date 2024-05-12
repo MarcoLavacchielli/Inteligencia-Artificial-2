@@ -12,6 +12,8 @@ public class Characters : MonoBehaviour
     public int iHaveMoney;
     public bool WantsToAttendConcert;
     public Patrullaje Patrullaje;
+    public GameObject vipGameObject; // Referencia al GameObject que deseas activar
+
     private Characters[] charactersInScene;
 
     private void Awake()
@@ -112,18 +114,21 @@ public class Characters : MonoBehaviour
     }
 
     // Función para trabajar con personajes VIP
+    // Función para trabajar con personajes VIP
     public void VIP()
     {
         // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
         var vipCharacters = charactersInScene
             .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
-            .TakeWhile(character => character.iHaveMoney > 20) // Tomar mientras tengan suficiente dinero
+            .TakeWhile(character => character.iHaveMoney >= 20) // Tomar mientras tengan suficiente dinero
             .ToList();
 
         // Imprimir mensajes de personajes VIP
         foreach (var vipCharacter in vipCharacters)
         {
             Debug.Log($"{vipCharacter.CharacterName} es VIP.");
+            // Activar el GameObject VIP solo para el personaje VIP actual
+            vipCharacter.vipGameObject.SetActive(true);
         }
     }
 }
