@@ -11,26 +11,29 @@ public class Characters : MonoBehaviour
     public int Age;
     private Color adultColor = Color.red;
     private Color minorColor = Color.green;
+    private Color _VIP = Color.magenta;
     public int iHaveMoney;
     public bool WantsToAttendConcert;
     public Patrullaje Patrullaje;
 
     private void Awake()
     {
-        Patrullaje=GetComponent<Patrullaje>();
-        
+        Patrullaje = GetComponent<Patrullaje>();
     }
+
     void Start()
     {
         GeneralTestingStuff();
+        VIP();
     }
-   
+
     public void IdidntGetTheTicketRoute()
     {
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
         Patrullaje.rechazadoBool = true;
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
     }
+
     public void GeneralTestingStuff()
     {
         // Obtener todas las instancias de Characters en la escena
@@ -45,16 +48,16 @@ public class Characters : MonoBehaviour
         var minorCharactersModified = ChangeCharacterColor(minorCharacters.Item1, minorCharacters.Item2);
 
         // Calcular la edad promedio de los personajes
-        float averageAge = charactersInScene.Select(character => character.Age).Aggregate((sum, age) => sum + age) / charactersInScene.Length;
+        float averageAge = (float)charactersInScene.Select(character => character.Age).Average();
         Debug.Log("Edad promedio de los personajes: " + averageAge);
 
         // Contar los personajes con suficiente dinero
-        int charactersWithMoney = charactersInScene.Aggregate(0, (count, character) => character.iHaveMoney > 10 ? count + 1 : count);
+        int charactersWithMoney = charactersInScene.Count(character => character.iHaveMoney > 10);
         Debug.Log("Personajes que podrán comprar una entrada/comida/ser robados por el jhonny: " + charactersWithMoney);
 
         // Contar los personajes inelegibles para asistir al recital
-        int ineligibleCharacters = charactersInScene.Aggregate(0, (count, character) =>
-            (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)) ? count + 1 : count);
+        int ineligibleCharacters = charactersInScene.Count(character =>
+            (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)));
         Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
 
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
@@ -108,5 +111,23 @@ public class Characters : MonoBehaviour
     (List<Characters>, Color) GetCharactersAndColor(List<Characters> characters, Color color)
     {
         return (characters, color);
+    }
+
+    // Función para trabajar con personajes VIP
+    public void VIP()
+    {
+        // Obtener todas las instancias de Characters en la escena
+        Characters[] charactersInScene = FindObjectsOfType<Characters>();
+
+        // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
+        var vipCharacters = charactersInScene
+            .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
+            .TakeWhile(character => character.iHaveMoney > 10) // Tomar mientras tengan suficiente dinero
+            .Select(character =>
+            {
+                Debug.Log($"{character.CharacterName} es VIP."); // Imprimir que el personaje es VIP
+                return character;
+            })
+            .ToList();
     }
 }
