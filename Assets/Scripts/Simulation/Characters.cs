@@ -117,7 +117,7 @@ public class Characters : MonoBehaviour
         // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
         var vipCharacters = charactersInScene
             .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
-            .TakeWhile(character => character.iHaveMoney > 10) // Tomar mientras tengan suficiente dinero
+            .TakeWhile(character => character.iHaveMoney > 20) // Tomar mientras tengan suficiente dinero
             .ToList();
 
         // Imprimir mensajes de personajes VIP
