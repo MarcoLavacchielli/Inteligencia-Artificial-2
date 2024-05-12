@@ -25,7 +25,15 @@ public class Characters : MonoBehaviour
         GeneralTestingStuff();
         VIP();
     }
+    public void MCDonaldsRoute()
+    {
+        Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
 
+    }
+    public void BankRoute()
+    {
+        Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
+    }
     public void IdidntGetTheTicketRoute()
     {
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");

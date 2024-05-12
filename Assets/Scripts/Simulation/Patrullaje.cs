@@ -10,7 +10,15 @@ public class Patrullaje : MonoBehaviour
     public float velocidad = 5f;
     public Transform[] puntosPatrullajeRechazados;
     public bool rechazadoBool;
+    public Characters Characters;
 
+    private void Awake()
+    {
+        Characters=GetComponent<Characters>();
+    }
+    /* acá, dependiendo de la plata, van al mcdonalds si tienen 0 pesos se van al banco y obtendrán un random de plata, si les alcanza al recital
+     * van. sino al mcdonalds*/
+    
     void Update()
     {
         if (rechazadoBool)
@@ -22,7 +30,15 @@ public class Patrullaje : MonoBehaviour
             AceptadosRoute();
         }
     }
+    public void BankMovement()
+    {
+        Debug.Log("Recorrido al banco");
+    }
 
+    public void MacMovement()
+    {
+        Debug.Log("Recorrido al mcdonalds");
+    }
     public void RechazadosRoute()
     {
         if (puntosPatrullajeRechazados.Length == 0)
