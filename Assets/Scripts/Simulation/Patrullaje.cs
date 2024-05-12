@@ -15,7 +15,6 @@ public class Patrullaje : MonoBehaviour
     {
         if (rechazadoBool)
         {
-           
             RechazadosRoute();
         }
         else
@@ -23,30 +22,34 @@ public class Patrullaje : MonoBehaviour
             AceptadosRoute();
         }
     }
+
     public void RechazadosRoute()
     {
         if (puntosPatrullajeRechazados.Length == 0)
             return;
 
+        // Copia para evitar los side effects, trabajas con las copias y listo, no modificas otras cosas
+        Transform[] puntosRechazadosOriginales = (Transform[])puntosPatrullajeRechazados.Clone();
+
         // Where
-        puntosPatrullajeRechazados = puntosPatrullajeRechazados.Where(p => p != null).ToArray();//sidee effect
+        IEnumerable<Transform> puntosValidos = puntosRechazadosOriginales.Where(p => p != null);
 
         // Select
-        IEnumerable<Vector3> posiciones = puntosPatrullajeRechazados.Select(p => p.position);
+        IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
         // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
-        // Si la distancia al punto de patrullaje es pequeña, pasa al siguiente punto
+        // logica para el siguiente punto
         if (direccion.magnitude < 0.1f)
         {
-            indicePuntoActual = (indicePuntoActual + 1) % posiciones.Count();//sidee effect
+            indicePuntoActual = (indicePuntoActual + 1) % posiciones.Count();
         }
         else
         {
-            transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);//sidee effect
-            transform.rotation = Quaternion.LookRotation(direccion);//sidee effect
+            transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);
+            transform.rotation = Quaternion.LookRotation(direccion);
         }
     }
 
@@ -55,26 +58,28 @@ public class Patrullaje : MonoBehaviour
         if (puntosPatrullaje.Length == 0)
             return;
 
+        // Copia para evitar los side effects, trabajas con las copias y listo, no modificas otras cosas
+        Transform[] puntosAceptadosOriginales = (Transform[])puntosPatrullaje.Clone();
+
         // Where
-        puntosPatrullaje = puntosPatrullaje.Where(p => p != null).ToArray();//sidee effect
+        IEnumerable<Transform> puntosValidos = puntosAceptadosOriginales.Where(p => p != null);
 
         // Select
-        IEnumerable<Vector3> posiciones = puntosPatrullaje.Select(p => p.position);
+        IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
         // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
-        // Si la distancia al punto de patrullaje es pequeña, pasa al siguiente punto
+        // logica para el siguiente punto
         if (direccion.magnitude < 0.1f)
         {
-            indicePuntoActual = (indicePuntoActual + 1) % posiciones.Count();//sidee effect
+            indicePuntoActual = (indicePuntoActual + 1) % posiciones.Count();
         }
         else
         {
-            transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);//sidee effect
-            transform.rotation = Quaternion.LookRotation(direccion);//sidee effect
+            transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);
+            transform.rotation = Quaternion.LookRotation(direccion);
         }
     }
-
 }
