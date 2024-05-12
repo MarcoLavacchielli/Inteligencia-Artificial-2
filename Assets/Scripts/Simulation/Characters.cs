@@ -114,7 +114,6 @@ public class Characters : MonoBehaviour
     }
 
     // Función para trabajar con personajes VIP
-    // Función para trabajar con personajes VIP
     public void VIP()
     {
         // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
@@ -123,12 +122,20 @@ public class Characters : MonoBehaviour
             .TakeWhile(character => character.iHaveMoney >= 20) // Tomar mientras tengan suficiente dinero
             .ToList();
 
-        // Imprimir mensajes de personajes VIP
+        // Lista para almacenar los GameObjects de los personajes VIP
+        List<GameObject> vipGameObjects = new List<GameObject>();
+
+        // Imprimir mensajes de personajes VIP y agregar sus GameObjects a la lista
         foreach (var vipCharacter in vipCharacters)
         {
             Debug.Log($"{vipCharacter.CharacterName} es VIP.");
-            // Activar el GameObject VIP solo para el personaje VIP actual
-            vipCharacter.vipGameObject.SetActive(true);
+            vipGameObjects.Add(vipCharacter.vipGameObject);
+        }
+
+        // Activar los GameObjects de los personajes VIP
+        foreach (var vipGameObject in vipGameObjects)
+        {
+            vipGameObject.SetActive(true);
         }
     }
 }
