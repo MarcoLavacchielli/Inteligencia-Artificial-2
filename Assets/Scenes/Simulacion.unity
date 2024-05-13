@@ -599,8 +599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Larry
-  CharacterLastName: Kaverga
+  CharacterName: Jorge
+  CharacterLastName: Cappeletti
   Age: 34
   iHaveMoney: 0
   WantsToAttendConcert: 0
@@ -2121,8 +2121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Jorge
-  CharacterLastName: Nitales
+  CharacterName: Julian
+  CharacterLastName: Cappeletti
   Age: 13
   iHaveMoney: 0
   WantsToAttendConcert: 0
@@ -2488,8 +2488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Tomas
-  CharacterLastName: Demichele
+  CharacterName: Max
+  CharacterLastName: Verstappen
   Age: 17
   iHaveMoney: 20
   WantsToAttendConcert: 1
@@ -4044,8 +4044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Kewas
-  CharacterLastName: Kaso
+  CharacterName: Martin
+  CharacterLastName: Borsa
   Age: 33
   iHaveMoney: 0
   WantsToAttendConcert: 0
@@ -5294,8 +5294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Paca
-  CharacterLastName: Garte
+  CharacterName: Macarena
+  CharacterLastName: Ferron
   Age: 55
   iHaveMoney: 0
   WantsToAttendConcert: 0
@@ -5625,8 +5625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5577d39217b2814f9686cb24fdb0760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: Elver
-  CharacterLastName: Galarga
+  CharacterName: Julian
+  CharacterLastName: Cappeletti
   Age: 43
   iHaveMoney: 0
   WantsToAttendConcert: 1
