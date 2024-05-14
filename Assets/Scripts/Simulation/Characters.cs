@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 public class Characters : MonoBehaviour
 {
@@ -33,10 +34,13 @@ public class Characters : MonoBehaviour
         Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
 
     }
+    
 
     public void BankRoute()
     {
         Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
+        //StartCoroutine(EsperarYExecutar());
+        //ejecutar funcion de tarjeta de credito y dale las monedas a este script
     }
 
     public void IdidntGetTheTicketRoute()

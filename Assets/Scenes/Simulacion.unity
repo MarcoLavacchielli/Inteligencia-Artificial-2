@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -709,6 +709,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &251590719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,6 +1203,7 @@ MonoBehaviour:
   BancoPatrullaje: []
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList: []
 --- !u!136 &333361105
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2231,6 +2235,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &600295720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,6 +2605,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &663742847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,6 +3759,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1745326547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1408813883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408813885}
+  - component: {fileID: 1408813884}
+  m_Layer: 0
+  m_Name: tarjetas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408813884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408813883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2a6f4b6b9630a43bb2ea6221e552b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 3
+--- !u!4 &1408813885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408813883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6799685, y: -6.042164, z: 14.609915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451515853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,6 +4209,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &1647338319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,6 +4274,51 @@ Transform:
   m_Children:
   - {fileID: 1902796}
   - {fileID: 1017337136}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1651134638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651134640}
+  - component: {fileID: 1651134639}
+  m_Layer: 0
+  m_Name: tarjetas (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1651134639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651134638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149baecb535c3dd4894e6dfef409a91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 5
+--- !u!4 &1651134640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651134638}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6799685, y: -6.042164, z: 14.609915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696648484
@@ -5404,6 +5507,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &2009749250
 GameObject:
   m_ObjectHideFlags: 0
@@ -5735,6 +5841,9 @@ MonoBehaviour:
   - {fileID: 2126980155}
   rechazadoBool: 0
   characters: {fileID: 0}
+  creditCardsList:
+  - {fileID: 1408813884}
+  - {fileID: 1651134639}
 --- !u!1 &2035074184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6459,3 +6568,5 @@ SceneRoots:
   - {fileID: 619080608}
   - {fileID: 1649526712}
   - {fileID: 1025496925}
+  - {fileID: 1408813885}
+  - {fileID: 1651134640}

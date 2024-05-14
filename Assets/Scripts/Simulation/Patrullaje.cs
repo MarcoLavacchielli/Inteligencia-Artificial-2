@@ -12,13 +12,22 @@ public class Patrullaje : MonoBehaviour
     public Transform[] BancoPatrullaje;
     public bool rechazadoBool;
     public Characters characters;
+    public List<CreditCards> creditCardsList;
 
     private void Awake()
     {
         characters = GetComponent<Characters>();
+        
     }
     /* acá, dependiendo de la plata, van al mcdonalds si tienen 0 pesos se van al banco y obtendrán un random de plata, si les alcanza al recital
      * van. sino al mcdonalds*/
+    private void Start()
+    {
+        if (rechazadoBool&& characters.iHaveMoney == 0)
+        {
+            StartCoroutine(EsperarYExecutar());
+        }
+    }
 
     void Update()
     {
@@ -36,6 +45,8 @@ public class Patrullaje : MonoBehaviour
             else
             {
                 BankMovement();
+                //GettingMoneyInBank();
+                //StartCoroutine(EsperarYExecutar());
             }
 
         }
@@ -43,6 +54,39 @@ public class Patrullaje : MonoBehaviour
         {
             AceptadosRoute();
         }
+    }
+    IEnumerator EsperarYExecutar()
+    {
+        // Esperar 10 segundos
+        yield return new WaitForSeconds(5);
+        //ejecutar en banco
+        
+        characters.iHaveMoney += ExtractMoney();//EJECUTAR FUNCION DE TARJETA DE CREDITO  ACÁ
+        Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
+        if (characters.iHaveMoney >= 10)
+        {
+            
+            rechazadoBool = false;
+        }
+        if(characters.iHaveMoney < 10)
+        {
+            StartCoroutine(EsperarYExecutar());
+        }
+
+    }
+    public int ExtractMoney()
+    {
+        CreditCards creditCards = creditCardsList.OfType<Premium>().First();
+        if (creditCards == null)
+        {
+            CreditCards creditCardsTwo = creditCardsList.OfType<Basic>().First();
+            return creditCardsTwo.GetCreditLimit();
+        }
+       return creditCards.GetCreditLimit();
+    }
+    public void GettingMoneyInBank()
+    {
+        StartCoroutine(EsperarYExecutar());
     }
 
     public void BankMovement()
