@@ -10,45 +10,48 @@ public class Patrullaje : MonoBehaviour
     public float velocidad = 5f;
     public Transform[] puntosPatrullajeRechazados;
     public Transform[] BancoPatrullaje;
-    public bool rechazadoBool;
+    public bool rechazadoMacBool;
+    public bool rechazadoBankBool;
     public Characters characters;
     public List<CreditCards> creditCardsList;
 
     private void Awake()
     {
         characters = GetComponent<Characters>();
-        
+
     }
     /* acá, dependiendo de la plata, van al mcdonalds si tienen 0 pesos se van al banco y obtendrán un random de plata, si les alcanza al recital
      * van. sino al mcdonalds*/
     private void Start()
     {
-        if (rechazadoBool&& characters.iHaveMoney == 0)
-        {
-            StartCoroutine(EsperarYExecutar());
-        }
+        StartCoroutine(EsperarYExecutar());
+
     }
 
     void Update()
     {
         MovementDecsision();
     }
-     public void MovementDecsision()
+    public void MovementDecsision()
     {
-        if (rechazadoBool)
+        if (rechazadoMacBool)
         {
-            if (characters.iHaveMoney != 0)
+            RechazadosRoute();
+
+            /*if (characters.iHaveMoney != 0)
             {
-                RechazadosRoute();
-                MacMovement();
             }
             else
             {
                 BankMovement();
                 //GettingMoneyInBank();
                 //StartCoroutine(EsperarYExecutar());
-            }
+            }*/
 
+        }
+        else if (rechazadoBankBool)
+        {
+            BankMovement();
         }
         else
         {
@@ -60,18 +63,19 @@ public class Patrullaje : MonoBehaviour
         // Esperar 10 segundos
         yield return new WaitForSeconds(5);
         //ejecutar en banco
-        
-        characters.iHaveMoney += ExtractMoney();//EJECUTAR FUNCION DE TARJETA DE CREDITO  ACÁ
-        Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
         if (characters.iHaveMoney >= 10)
         {
-            
-            rechazadoBool = false;
+            rechazadoBankBool=false;
+            rechazadoMacBool = false;
         }
-        if(characters.iHaveMoney < 10)
+        if (rechazadoBankBool && characters.iHaveMoney < 10)
         {
+            characters.iHaveMoney += ExtractMoney();//EJECUTAR FUNCION DE TARJETA DE CREDITO  ACÁ
+            Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
             StartCoroutine(EsperarYExecutar());
+
         }
+
 
     }
     public int ExtractMoney()
@@ -82,7 +86,7 @@ public class Patrullaje : MonoBehaviour
             CreditCards creditCardsTwo = creditCardsList.OfType<Basic>().First();
             return creditCardsTwo.GetCreditLimit();
         }
-       return creditCards.GetCreditLimit();
+        return creditCards.GetCreditLimit();
     }
     public void GettingMoneyInBank()
     {
@@ -121,10 +125,7 @@ public class Patrullaje : MonoBehaviour
         }
     }
 
-    public void MacMovement()
-    {
-        Debug.Log("Recorrido al mcdonalds");
-    }
+
     public void RechazadosRoute()
     {
         if (puntosPatrullajeRechazados.Length == 0)

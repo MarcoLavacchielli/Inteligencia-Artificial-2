@@ -31,6 +31,7 @@ public class Characters : MonoBehaviour
 
     public void MCDonaldsRoute()
     {
+        Patrullaje.rechazadoMacBool = true;
         Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
 
     }
@@ -39,6 +40,7 @@ public class Characters : MonoBehaviour
     public void BankRoute()
     {
         Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
+        Patrullaje.rechazadoBankBool = true;
         //StartCoroutine(EsperarYExecutar());
         //ejecutar funcion de tarjeta de credito y dale las monedas a este script
     }
@@ -46,7 +48,7 @@ public class Characters : MonoBehaviour
     public void IdidntGetTheTicketRoute()
     {
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
-        Patrullaje.rechazadoBool = true;
+        Patrullaje.rechazadoMacBool = true;
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
     }
 

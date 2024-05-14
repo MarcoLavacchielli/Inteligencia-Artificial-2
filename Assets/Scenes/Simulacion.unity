@@ -707,7 +707,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
@@ -1201,7 +1202,8 @@ MonoBehaviour:
   velocidad: 5
   puntosPatrullajeRechazados: []
   BancoPatrullaje: []
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList: []
 --- !u!136 &333361105
@@ -2233,7 +2235,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
@@ -2498,7 +2501,7 @@ MonoBehaviour:
   CharacterName: Max
   CharacterLastName: Verstappen
   Age: 17
-  iHaveMoney: 20
+  iHaveMoney: 3
   WantsToAttendConcert: 1
   Patrullaje: {fileID: 0}
   vipGameObject: {fileID: 1919278299}
@@ -2603,7 +2606,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
@@ -4207,7 +4211,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
@@ -5505,7 +5510,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
@@ -5839,7 +5845,8 @@ MonoBehaviour:
   - {fileID: 371542502}
   - {fileID: 1728323099}
   - {fileID: 2126980155}
-  rechazadoBool: 0
+  rechazadoMacBool: 0
+  rechazadoBankBool: 0
   characters: {fileID: 0}
   creditCardsList:
   - {fileID: 1408813884}
