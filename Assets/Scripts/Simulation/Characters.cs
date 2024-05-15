@@ -13,9 +13,11 @@ public class Characters : MonoBehaviour
     public int iHaveMoney;
     public bool WantsToAttendConcert;
     public Patrullaje Patrullaje;
-    public GameObject vipGameObject; // Referencia al GameObject que deseas activar
+    public GameObject vipGameObject;
+    public GameObject old;
 
     private Characters[] charactersInScene;
+    private float averageAge;
 
     private void Awake()
     {
@@ -24,22 +26,54 @@ public class Characters : MonoBehaviour
 
     void Start()
     {
-        charactersInScene = FindObjectsOfType<Characters>(); // Se busca una vez al inicio
+        charactersInScene = FindObjectsOfType<Characters>();
         GeneralTestingStuff();
+        CalculateAverageAge();
     }
 
     private void Update()
     {
+        EnoughtOld();
         VIP();
+    }
+
+    private void CalculateAverageAge()
+    {
+        // Calcular la edad promedio de los personajes
+        averageAge = (float)charactersInScene.Select(character => character.Age).Average();
+        Debug.Log("Edad promedio de los personajes: " + averageAge);
+    }
+
+    private void EnoughtOld()
+    {
+        // Lista para almacenar los personajes que tienen más años que el promedio
+        List<Characters> charactersToActivate = new List<Characters>();
+
+        foreach (var character in charactersInScene)
+        {
+            // Verificar si el personaje tiene más años que el promedio
+            if (character.Age > averageAge)
+            {
+                charactersToActivate.Add(character);
+            }
+        }
+
+        // Activar los GameObjects de los personajes que tienen más años que el promedio
+        foreach (var character in charactersToActivate)
+        {
+            if (character.old != null)
+            {
+                character.old.SetActive(true);
+            }
+        }
     }
 
     public void MCDonaldsRoute()
     {
         Patrullaje.rechazadoMacBool = true;
         Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
-
     }
-    
+
 
     public void BankRoute()
     {
@@ -63,10 +97,6 @@ public class Characters : MonoBehaviour
         var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
         ChangeCharacterColor(adultCharacters, adultColor);
         ChangeCharacterColor(minorCharacters, minorColor);
-
-        // Calcular la edad promedio de los personajes
-        float averageAge = (float)charactersInScene.Select(character => character.Age).Average();
-        Debug.Log("Edad promedio de los personajes: " + averageAge);
 
         // Contar los personajes con suficiente dinero
         int charactersWithMoney = charactersInScene.Count(character => character.iHaveMoney > 10);
@@ -138,7 +168,7 @@ public class Characters : MonoBehaviour
         // Imprimir mensajes de personajes VIP y agregar sus GameObjects a la lista
         foreach (var vipCharacter in vipCharacters)
         {
-            Debug.Log($"{vipCharacter.CharacterName} es VIP.");
+            //Debug.Log($"{vipCharacter.CharacterName} es VIP.");
             vipGameObjects.Add(vipCharacter.vipGameObject);
         }
 
