@@ -26,6 +26,10 @@ public class Characters : MonoBehaviour
     {
         charactersInScene = FindObjectsOfType<Characters>(); // Se busca una vez al inicio
         GeneralTestingStuff();
+    }
+
+    private void Update()
+    {
         VIP();
     }
 
