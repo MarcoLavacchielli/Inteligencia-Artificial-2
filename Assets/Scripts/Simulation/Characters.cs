@@ -25,7 +25,10 @@ public class Characters : MonoBehaviour
     void Start()
     {
         charactersInScene = FindObjectsOfType<Characters>();
-        GeneralTestingStuff();
+        OrderCharactersByLastNameAndNameAndAge();
+        CountCharactersWithMoney();
+        CountIneligibleCharactersForConcert();
+        FilterAndChangeCharacterColor();
         EnoughtOld();
     }
 
@@ -85,14 +88,6 @@ public class Characters : MonoBehaviour
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
         Patrullaje.rechazadoMacBool = true;
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
-    }
-
-    private void GeneralTestingStuff()
-    {
-        FilterAndChangeCharacterColor();
-        CountCharactersWithMoney();
-        CountIneligibleCharactersForConcert();
-        OrderCharactersByLastNameAndNameAndAge();
     }
 
     private void FilterAndChangeCharacterColor()
