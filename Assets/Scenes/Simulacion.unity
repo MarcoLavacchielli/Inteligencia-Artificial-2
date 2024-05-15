@@ -709,7 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Jorge
   CharacterLastName: Cappeletti
-  Age: 26
+  Age: 47
   iHaveMoney: 0
   WantsToAttendConcert: 0
   Patrullaje: {fileID: 0}
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Julian
   CharacterLastName: Cappeletti
-  Age: 13
+  Age: 15
   iHaveMoney: 0
   WantsToAttendConcert: 0
   Patrullaje: {fileID: 0}
