@@ -28,7 +28,6 @@ public class Characters : MonoBehaviour
         OrderCharactersByLastNameAndNameAndAge();
         CountCharactersWithMoney();
         CountIneligibleCharactersForConcert();
-        FilterAndChangeCharacterColor();
         EnoughtOld();
     }
 
@@ -42,6 +41,9 @@ public class Characters : MonoBehaviour
         // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
         var adultCharacters = charactersInScene.Where(character => character.Age >= 18).ToList();
         var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
+
+        ChangeCharacterColor(adultCharacters, adultColor);
+        ChangeCharacterColor(minorCharacters, minorColor);
 
         // Usar Zip para combinar las edades de los personajes adultos y menores en una secuencia de tuplas
         var ageDifferences = adultCharacters.Select(adult => adult.Age)
@@ -88,15 +90,6 @@ public class Characters : MonoBehaviour
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
         Patrullaje.rechazadoMacBool = true;
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
-    }
-
-    private void FilterAndChangeCharacterColor()
-    {
-        // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
-        var adultCharacters = charactersInScene.Where(character => character.Age >= 18).ToList();
-        var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
-        ChangeCharacterColor(adultCharacters, adultColor);
-        ChangeCharacterColor(minorCharacters, minorColor);
     }
 
     private void CountCharactersWithMoney()
