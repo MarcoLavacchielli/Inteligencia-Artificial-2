@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Collections;
 
 public class Characters : MonoBehaviour
 {
@@ -17,7 +16,6 @@ public class Characters : MonoBehaviour
     public GameObject old;
 
     private Characters[] charactersInScene;
-    private float averageAge;
 
     private void Awake()
     {
@@ -28,42 +26,41 @@ public class Characters : MonoBehaviour
     {
         charactersInScene = FindObjectsOfType<Characters>();
         GeneralTestingStuff();
-        CalculateAverageAge();
+        EnoughtOld();
     }
 
     private void Update()
     {
-        EnoughtOld();
         VIP();
-    }
-
-    private void CalculateAverageAge()
-    {
-        // Calcular la edad promedio de los personajes
-        averageAge = (float)charactersInScene.Select(character => character.Age).Average();
-        Debug.Log("Edad promedio de los personajes: " + averageAge);
     }
 
     private void EnoughtOld()
     {
-        // Lista para almacenar los personajes que tienen más años que el promedio
-        List<Characters> charactersToActivate = new List<Characters>();
+        // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
+        var adultCharacters = charactersInScene.Where(character => character.Age >= 18).ToList();
+        var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
+
+        // Usar Zip para combinar las edades de los personajes adultos y menores en una secuencia de tuplas
+        var ageDifferences = adultCharacters.Select(adult => adult.Age)
+                                .Zip(minorCharacters.Select(minor => minor.Age), (adultAge, minorAge) => adultAge - minorAge);
+
+        // Calcular el promedio de la diferencia de edad entre los personajes adultos y menores
+        float averageAgeDifference = (float)ageDifferences.Average();
+        Debug.Log("Promedio de diferencia de edad entre personajes adultos y menores: " + averageAgeDifference);
 
         foreach (var character in charactersInScene)
         {
-            // Verificar si el personaje tiene más años que el promedio
-            if (character.Age > averageAge)
-            {
-                charactersToActivate.Add(character);
-            }
-        }
+            // Calcular la diferencia de edad de este personaje con respecto a la diferencia promedio
+            int characterAgeDifference = character.Age - (int)averageAgeDifference;
 
-        // Activar los GameObjects de los personajes que tienen más años que el promedio
-        foreach (var character in charactersToActivate)
-        {
-            if (character.old != null)
+            // Verificar si la diferencia de edad del personaje es mayor que cero
+            if (characterAgeDifference > 0)
             {
-                character.old.SetActive(true);
+                // Activar el GameObject correspondiente
+                if (character.old != null)
+                {
+                    character.old.SetActive(true);
+                }
             }
         }
     }
@@ -90,23 +87,40 @@ public class Characters : MonoBehaviour
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
     }
 
-    public void GeneralTestingStuff()
+    private void GeneralTestingStuff()
+    {
+        FilterAndChangeCharacterColor();
+        CountCharactersWithMoney();
+        CountIneligibleCharactersForConcert();
+        OrderCharactersByLastNameAndNameAndAge();
+    }
+
+    private void FilterAndChangeCharacterColor()
     {
         // Filtrar los personajes mayores y menores de 18 años y obtener el color correspondiente
         var adultCharacters = charactersInScene.Where(character => character.Age >= 18).ToList();
         var minorCharacters = charactersInScene.Where(character => character.Age < 18).ToList();
         ChangeCharacterColor(adultCharacters, adultColor);
         ChangeCharacterColor(minorCharacters, minorColor);
+    }
 
+    private void CountCharactersWithMoney()
+    {
         // Contar los personajes con suficiente dinero
         int charactersWithMoney = charactersInScene.Count(character => character.iHaveMoney > 10);
         Debug.Log("Personajes que podrán comprar una entrada/comida/ser robados por el jhonny: " + charactersWithMoney);
+    }
 
+    private void CountIneligibleCharactersForConcert()
+    {
         // Contar los personajes inelegibles para asistir al recital
         int ineligibleCharacters = charactersInScene.Count(character =>
             (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)));
         Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
+    }
 
+    private void OrderCharactersByLastNameAndNameAndAge()
+    {
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
         var sortedCharacters = charactersInScene
             .OrderBy(character => character.CharacterLastName)
@@ -130,18 +144,10 @@ public class Characters : MonoBehaviour
             Vector3 newPosition = new Vector3(xPos, transform.position.y, transform.position.z);
             sortedCharacters[i].transform.position = newPosition;
         }
-
-        // Usar Zip para combinar las edades de los personajes adultos y menores en una secuencia de tuplas
-        var ageDifferences = adultCharacters.Select(adult => adult.Age)
-                                .Zip(minorCharacters.Select(minor => minor.Age), (adultAge, minorAge) => adultAge - minorAge);
-
-        // Calcular el promedio de las diferencias de edad
-        float averageAgeDifference = (float)ageDifferences.Average();
-        Debug.Log("Promedio de años que se llevan los personajes adultos con respecto a los menores: " + averageAgeDifference);
     }
 
     // Función para cambiar el color de los personajes
-    void ChangeCharacterColor(List<Characters> characters, Color color)
+    private void ChangeCharacterColor(List<Characters> characters, Color color)
     {
         foreach (var character in characters)
         {
