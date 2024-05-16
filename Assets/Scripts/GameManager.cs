@@ -15,11 +15,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        //forEachMac(mac(DeterminateRouteOfCharacters()));
-        //forEachBank(Bank(DeterminateRouteOfCharacters()));
-        
         ToBankOrMacDefinitive(DeterminateRouteOfCharacters());
-
     }
     public void ToBankOrMacDefinitive(List<Characters> FirstFilter)
     {
@@ -66,86 +62,4 @@ public class GameManager : MonoBehaviour
         
         return ineligibleCharacters;
     }
-   
-    /*
-    public void forEachMac(List<Characters> ineligibleCharacters)
-    {
-        foreach(Characters character in ineligibleCharacters)
-        {
-            character.MCDonaldsRoute();
-        }
-    }
-    public List<Characters> mac(List<Characters> x)
-    {
-        List<Characters> ineligibleCharacters = x.Aggregate(new List<Characters>(), (list, character) =>
-        {
-            if (character.WantsToAttendConcert && (character.iHaveMoney != 0))
-            {
-                list.Add(character);
-            }
-            return list;
-        });
-        return ineligibleCharacters;
-    }
-    public List<Characters> Bank(List<Characters> x)
-    {
-        List<Characters> ineligibleCharacters = x.Aggregate(new List<Characters>(), (list, character) =>
-        {
-            if (character.WantsToAttendConcert && (character.iHaveMoney == 0))
-            {
-                list.Add(character);
-            }
-            return list;
-        });
-        return ineligibleCharacters;
-    }
-    public void forEachBank(List<Characters> ineligibleCharacters)
-    {
-        foreach (Characters character in ineligibleCharacters)
-        {
-            character.BankRoute();
-        }
-    }
-    public void ListOfTheOnesThatGoToMac()
-    {
-        List<Characters> ineligibleCharacters = Characters.Aggregate(new List<Characters>(), (list, character) =>
-        {
-            if (character.WantsToAttendConcert && (character.iHaveMoney!=0))
-            {
-                list.Add(character);
-            }
-            return list;
-        });
-        foreach (Characters character in ineligibleCharacters)
-        {
-            character.MCDonaldsRoute();
-        }
-
-        Debug.Log("Personajes inelegibles que van al mcdonalds: " + ineligibleCharacters.Count);
-        
-        
-    }
-    public void ListOfTheOnesThatGoToBank()
-    {
-        List<Characters> ineligibleCharacters = Characters.Aggregate(new List<Characters>(), (list, character) =>
-        {
-            if (character.WantsToAttendConcert && (character.iHaveMoney == 0))
-            {
-                list.Add(character);
-            }
-            return list;
-        });
-        foreach (Characters character in ineligibleCharacters)
-        {
-            character.BankRoute();
-        }
-
-        Debug.Log("Personajes inelegibles que van al banco: " + ineligibleCharacters.Count);
-
-
-    }*/
-
-
-
-
 }
