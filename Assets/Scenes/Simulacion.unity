@@ -4665,7 +4665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Characters: []
-  CharacterList: []
 --- !u!4 &855230589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2324658738818035137, guid: 4c8696f6477250348a156e87449ed520, type: 3}
