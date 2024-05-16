@@ -128,12 +128,17 @@ public class Patrullaje : MonoBehaviour
     public int ExtractMoney()
     {
         CreditCards creditCards = creditCardsList.OfType<Premium>().First();
-        if (creditCards == null)
+        int i = Random.Range(1, 10);
+        if (i <= 5)
+        {
+            return creditCards.GetCreditLimit();
+
+        }
+        else
         {
             CreditCards creditCardsTwo = creditCardsList.OfType<Basic>().First();
             return creditCardsTwo.GetCreditLimit();
         }
-        return creditCards.GetCreditLimit();
     }
     public void GettingMoneyInBank()
     {

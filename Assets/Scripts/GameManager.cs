@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 public class GameManager : MonoBehaviour
 {
     public Characters[] Characters;
+    public List<Character> CharacterList;
     private void Awake()
     {
         Characters = FindObjectsOfType<Characters>();

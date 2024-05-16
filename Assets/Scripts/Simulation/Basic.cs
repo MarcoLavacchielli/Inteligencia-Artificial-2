@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Basic : CreditCards
 {
+    public ParticleSystem PremiumBlueParticles;
 
+    private void Start()
+    {
+        PremiumBlueParticles= GetComponentInChildren<ParticleSystem>();
+    }
     public override int GetCreditLimit()
     {
-        return Random.Range(1, 5) * multiplier;
+        PremiumBlueParticles.Play();
+        return Random.Range(1, 3) * multiplier;
     }
 }
