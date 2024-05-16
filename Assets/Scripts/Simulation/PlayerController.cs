@@ -6,13 +6,13 @@ using System.Linq;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    public TextMeshProUGUI collectedBallsText;
+    public TextMeshProUGUI basuraText;
 
     private Rigidbody rb;
-    private int redBallsCollected = 0;
-    private int blueBallsCollected = 0;
-    private List<GameObject> redBalls = new List<GameObject>();
-    private List<GameObject> blueBalls = new List<GameObject>();
+    private int latasCollected = 0;
+    private int botellasCollected = 0;
+    private List<GameObject> latas = new List<GameObject>();
+    private List<GameObject> botellas = new List<GameObject>();
 
     void Start()
     {
@@ -33,14 +33,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("RedBall"))
         {
-            redBallsCollected++;
-            redBalls.Add(other.gameObject);
+            latasCollected++;
+            latas.Add(other.gameObject);
             CollectBall(other.gameObject);
         }
         else if (other.CompareTag("BlueBall"))
         {
-            blueBallsCollected++;
-            blueBalls.Add(other.gameObject);
+            botellasCollected++;
+            botellas.Add(other.gameObject);
             CollectBall(other.gameObject);
         }
 
@@ -54,10 +54,10 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        var allBallsCollected = redBalls.Concat(blueBalls).ToList();
+        var allGarbajeCollected = latas.Concat(botellas).ToList();
 
-        collectedBallsText.text = "Latas recogidas: " + redBallsCollected + "\n" +
-                                  "Botellas recogidas: " + blueBallsCollected + "\n" +
-                                  "Total de basura recogida: " + allBallsCollected.Count;
+        basuraText.text = "Latas recogidas: " + latasCollected + "\n" +
+                                  "Botellas recogidas: " + botellasCollected + "\n" +
+                                  "Total de basura recogida: " + allGarbajeCollected.Count;
     }
 }
