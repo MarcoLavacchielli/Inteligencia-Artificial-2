@@ -118,7 +118,7 @@ public class Patrullaje : MonoBehaviour
         if (rechazadoBankBool && characters.iHaveMoney < 10)
         {
             characters.iHaveMoney += ExtractMoney();//EJECUTAR FUNCION DE TARJETA DE CREDITO  ACÁ
-            Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
+            //Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
             StartCoroutine(EsperarYExecutar());
 
         }
