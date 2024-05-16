@@ -64,7 +64,6 @@ public class Patrullaje : MonoBehaviour
         // Select
         IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
-        // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
@@ -84,17 +83,6 @@ public class Patrullaje : MonoBehaviour
         if (rechazadoMacBool)
         {
             RechazadosRoute();
-
-            /*if (characters.iHaveMoney != 0)
-            {
-            }
-            else
-            {
-                BankMovement();
-                //GettingMoneyInBank();
-                //StartCoroutine(EsperarYExecutar());
-            }*/
-
         }
         else if (rechazadoBankBool)
         {
@@ -107,9 +95,8 @@ public class Patrullaje : MonoBehaviour
     }
     IEnumerator EsperarYExecutar()
     {
-        // Esperar 10 segundos
         yield return new WaitForSeconds(5);
-        //ejecutar en banco
+
         if (characters.iHaveMoney >= 10)
         {
             rechazadoBankBool = false;
@@ -117,8 +104,7 @@ public class Patrullaje : MonoBehaviour
         }
         if (rechazadoBankBool && characters.iHaveMoney < 10)
         {
-            characters.iHaveMoney += ExtractMoney();//EJECUTAR FUNCION DE TARJETA DE CREDITO  ACÁ
-            //Debug.Log($"se ha conseguido{characters.iHaveMoney} pesos en el banco");
+            characters.iHaveMoney += ExtractMoney();
             StartCoroutine(EsperarYExecutar());
 
         }
@@ -147,8 +133,6 @@ public class Patrullaje : MonoBehaviour
 
     public void BankMovement()
     {
-        //Debug.Log("Recorrido al banco");
-
         if (BancoPatrullaje.Length == 0)
             return;
 
@@ -161,7 +145,6 @@ public class Patrullaje : MonoBehaviour
         // Select
         IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
-        // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
@@ -192,7 +175,6 @@ public class Patrullaje : MonoBehaviour
         // Select
         IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
-        // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
@@ -222,7 +204,6 @@ public class Patrullaje : MonoBehaviour
         // Select
         IEnumerable<Vector3> posiciones = puntosValidos.Select(p => p.position);
 
-        // Una mezcla rara de skip y take
         Vector3 direccion = posiciones.Skip(indicePuntoActual).First() - transform.position;
         direccion.y = 0f;
 
