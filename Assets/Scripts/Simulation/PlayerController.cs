@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
     {
         var allBallsCollected = redBalls.Concat(blueBalls).ToList();
 
-        collectedBallsText.text = "Pelotas rojas recogidas: " + redBallsCollected + "\n" +
-                                  "Pelotas azules recogidas: " + blueBallsCollected + "\n" +
-                                  "Total de pelotas recogidas: " + allBallsCollected.Count;
+        collectedBallsText.text = "Latas recogidas: " + redBallsCollected + "\n" +
+                                  "Botellas recogidas: " + blueBallsCollected + "\n" +
+                                  "Total de basura recogida: " + allBallsCollected.Count;
     }
 }

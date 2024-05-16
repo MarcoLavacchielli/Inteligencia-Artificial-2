@@ -107,7 +107,7 @@ public class Characters : MonoBehaviour
         Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
     }
 
-    private void OrderCharactersByLastNameAndNameAndAge()
+    public void OrderCharactersByLastNameAndNameAndAge()
     {
         // Ordenar los personajes por apellido, luego por nombre y finalmente por edad
         var sortedCharacters = charactersInScene
