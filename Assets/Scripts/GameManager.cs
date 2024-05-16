@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     {
         List<Characters> ineligibleCharacters = x.Aggregate(new List<Characters>(), (list, character) =>
         {
-            if (character.WantsToAttendConcert && (character.iHaveMoney == 0))
+            if (character.WantsToAttendConcert && (character.iHaveMoney != 0))
             {
                 list.Add(character);
             }
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         List<Characters> ineligibleCharacters = x.Aggregate(new List<Characters>(), (list, character) =>
         {
-            if (character.WantsToAttendConcert && (character.iHaveMoney != 0))
+            if (character.WantsToAttendConcert && (character.iHaveMoney == 0))
             {
                 list.Add(character);
             }
