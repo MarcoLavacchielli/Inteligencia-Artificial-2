@@ -142,7 +142,7 @@ public class Characters : MonoBehaviour
         // Iterar sobre los personajes VIP para construir la cadena de información
         foreach (var vipCharacter in vipCharacters)
         {
-            vipInfo += "Nombre del VIP: " + vipCharacter.CharacterName + " Cantidad de dinero: " + vipCharacter.iHaveMoney + "\n";
+            vipInfo += "Nombre del VIP: " + vipCharacter.CharacterName + " " + vipCharacter.CharacterLastName + " Cantidad de dinero: " + vipCharacter.iHaveMoney + "\n";
         }
 
         // Asignar la cadena de información al texto que deseas mostrar
