@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public List<Characters> DeterminateRouteOfCharacters()
     {
-        //Characters[] charactersInScene = FindObjectsOfType<Characters>();
+        
 
         List<Characters> ineligibleCharacters = Characters.Aggregate(new List<Characters>(), (list, character) =>
         {
@@ -62,16 +62,11 @@ public class GameManager : MonoBehaviour
             return list;
         });
         
-        Debug.Log("Personajes inelegibles para asistir al recital: " + ineligibleCharacters.Count);
+        
         
         return ineligibleCharacters;
     }
-    /*1 primero hago un get component en el start para que tenga a todos los characters
-     * 2 ejecuto una funcion con Linq que devuelva una lista con los que van al mac
-     * 3 meto dicha funcion con linq como parametro en otra que ejecute el foreach que lleva al Mac
-     
-     
-     */
+   
     /*
     public void forEachMac(List<Characters> ineligibleCharacters)
     {

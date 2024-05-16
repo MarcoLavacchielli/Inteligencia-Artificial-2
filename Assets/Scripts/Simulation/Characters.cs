@@ -28,8 +28,8 @@ public class Characters : MonoBehaviour
     {
         charactersInScene = FindObjectsOfType<Characters>();
         OrderCharactersByLastNameAndNameAndAge();
-        CountCharactersWithMoney();
-        CountIneligibleCharactersForConcert();
+        //CountCharactersWithMoney();
+        //CountIneligibleCharactersForConcert();
         EnoughtOld();
     }
 
@@ -76,39 +76,39 @@ public class Characters : MonoBehaviour
     public void MCDonaldsRoute()
     {
         Patrullaje.rechazadoMacBool = true;
-        Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
+        //Debug.Log($"Personajes inelegibles que van al mcdonalds{CharacterName} ");
     }
 
 
     public void BankRoute()
     {
-        Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
+        //Debug.Log($"Personajes inelegibles que van al banco{CharacterName} ");
         Patrullaje.rechazadoBankBool = true;
         //StartCoroutine(EsperarYExecutar());
         //ejecutar funcion de tarjeta de credito y dale las monedas a este script
     }
 
-    public void IdidntGetTheTicketRoute()
+    /*public void IdidntGetTheTicketRoute()
     {
         Debug.Log($"IdidntGetTheTicketRoute ejecutado {CharacterName}");
         Patrullaje.rechazadoMacBool = true;
         // no pase al recital ejecutar funcion en mi script de patrullaje para seguir determinado recorrido. Ejecutado en GM
-    }
-
+    }*/
+    /*
     private void CountCharactersWithMoney()
     {
         // Contar los personajes con suficiente dinero
         int charactersWithMoney = charactersInScene.Count(character => character.iHaveMoney > 10);
         Debug.Log("Personajes que podrán comprar una entrada/comida/ser robados por el jhonny: " + charactersWithMoney);
     }
-
-    private void CountIneligibleCharactersForConcert()
+    */
+   /* private void CountIneligibleCharactersForConcert()
     {
         // Contar los personajes inelegibles para asistir al recital
         int ineligibleCharacters = charactersInScene.Count(character =>
             (character.WantsToAttendConcert && (character.iHaveMoney <= 10 || character.Age < 18)));
         Debug.Log("Cantidad de personajes inelegibles para asistir al recital: " + ineligibleCharacters);
-    }
+    }*/
 
     public void OrderCharactersByLastNameAndNameAndAge()
     {
