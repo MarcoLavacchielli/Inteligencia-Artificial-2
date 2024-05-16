@@ -16,6 +16,7 @@ public class Characters : MonoBehaviour
     public GameObject vipGameObject;
     public GameObject old;
     public TextMeshProUGUI ageDifference;
+    public TextMeshProUGUI listadeVIPS;
 
     private Characters[] charactersInScene;
 
@@ -132,8 +133,20 @@ public class Characters : MonoBehaviour
         // Tomar los personajes VIP mientras tengan suficiente dinero para ser VIP
         var vipCharacters = charactersInScene
             .OrderByDescending(character => character.iHaveMoney) // Ordenar por dinero en orden descendente
-            .TakeWhile(character => character.iHaveMoney >= 20) // Tomar mientras tengan suficiente dinero
+            .Where(character => character.iHaveMoney >= 20) // Filtrar aquellos que tienen suficiente dinero
             .ToList();
+
+        // Cadena para almacenar la información de los personajes VIP
+        string vipInfo = "";
+
+        // Iterar sobre los personajes VIP para construir la cadena de información
+        foreach (var vipCharacter in vipCharacters)
+        {
+            vipInfo += "Nombre del VIP: " + vipCharacter.CharacterName + " Cantidad de dinero: " + vipCharacter.iHaveMoney + "\n";
+        }
+
+        // Asignar la cadena de información al texto que deseas mostrar
+        listadeVIPS.text = vipInfo;
 
         // Lista para almacenar los GameObjects de los personajes VIP
         List<GameObject> vipGameObjects = new List<GameObject>();
@@ -141,7 +154,6 @@ public class Characters : MonoBehaviour
         // Imprimir mensajes de personajes VIP y agregar sus GameObjects a la lista
         foreach (var vipCharacter in vipCharacters)
         {
-            //Debug.Log($"{vipCharacter.CharacterName} es VIP.");
             vipGameObjects.Add(vipCharacter.vipGameObject);
         }
 
