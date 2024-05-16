@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class Characters : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Characters : MonoBehaviour
     public Patrullaje Patrullaje;
     public GameObject vipGameObject;
     public GameObject old;
+    public TextMeshProUGUI ageDifference;
 
     private Characters[] charactersInScene;
 
@@ -51,7 +53,8 @@ public class Characters : MonoBehaviour
 
         // Calcular el promedio de la diferencia de edad entre los personajes adultos y menores
         float averageAgeDifference = (float)ageDifferences.Average();
-        Debug.Log("Promedio de diferencia de edad entre personajes adultos y menores: " + averageAgeDifference);
+        ageDifference.text = "Promedio de diferencia de edad entre personajes adultos y menores: " + averageAgeDifference;
+        //Debug.Log("Promedio de diferencia de edad entre personajes adultos y menores: " + averageAgeDifference);
 
         foreach (var character in charactersInScene)
         {
